@@ -1,0 +1,111 @@
+<<<<<<< HEAD
+# Prepaid Prize Spin Wheel (Weighted + Wallet + Withdraw)
+
+This project lets users **top-up**, **spin a weighted prize wheel**, receive **monetary prizes directly to their wallet**, and **withdraw via GCash/Maya** (mock payout in demo). Built with **Firebase Hosting + Firestore + Cloud Functions**.
+
+## Features
+- Email/password authentication (replace or add OAuth as needed)
+- Live wallet balance & spin history
+- Server-authoritative spin: atomic **deduct cost → pick weighted prize → credit prize**
+- Withdraw callable with minimum (₱500 default)
+- Checkout creation + webhook to credit top-ups (Maya example; add your GCash aggregator)
+
+## Quick Start
+1. **Firebase**
+   ```bash
+   npm i -g firebase-tools
+   firebase login
+   firebase init   # choose Hosting + Functions + Firestore
+   ```
+2. Paste your web app config into `web/firebase-init.js`.
+3. **Functions**
+   ```bash
+   cd functions
+   npm install
+   cd ..
+   ```
+4. **Maya sandbox** (optional):
+   ```bash
+   firebase functions:config:set maya.secret="sk_test_xxx" maya.merchantid="YOUR_MERCHANT_ID"
+   ```
+5. **Run locally**
+   ```bash
+   firebase emulators:start
+   ```
+6. **Deploy**
+   ```bash
+   firebase deploy
+   ```
+
+## Configure Payments
+- **Top-up**: `/api/createCheckout` creates a Maya Checkout (sandbox). Replace with production keys/URL for live.
+- **Webhook**: Set Maya webhook to `https://YOUR_PROJECT.web.app/api/webhooks/maya`.
+- **GCash**: Use an aggregator (Checkout.com, Adyen, PayMongo, Rapyd, Xendit). Implement its create-session + webhook similar to the Maya routes.
+
+## Security Notes
+- Verify webhook signatures per provider using `req.rawBody`.
+- Firestore rules block client balance edits; all balance mutations happen in Cloud Functions transactions.
+- Keep PRIZES and costs on the server; client loads read-only labels via `getConfig`.
+
+## Customize
+- Edit **SPIN_COST**, **MIN_WITHDRAW**, and **PRIZES** in `functions/index.js`.
+- Branding/UI in `web/styles.css`.
+- Add phone OTP or social login via Firebase Auth if needed.
+```
+
+=======
+# Prepaid Prize Spin Wheel (Weighted + Wallet + Withdraw)
+
+This project lets users **top-up**, **spin a weighted prize wheel**, receive **monetary prizes directly to their wallet**, and **withdraw via GCash/Maya** (mock payout in demo). Built with **Firebase Hosting + Firestore + Cloud Functions**.
+
+## Features
+- Email/password authentication (replace or add OAuth as needed)
+- Live wallet balance & spin history
+- Server-authoritative spin: atomic **deduct cost → pick weighted prize → credit prize**
+- Withdraw callable with minimum (₱500 default)
+- Checkout creation + webhook to credit top-ups (Maya example; add your GCash aggregator)
+
+## Quick Start
+1. **Firebase**
+   ```bash
+   npm i -g firebase-tools
+   firebase login
+   firebase init   # choose Hosting + Functions + Firestore
+   ```
+2. Paste your web app config into `web/firebase-init.js`.
+3. **Functions**
+   ```bash
+   cd functions
+   npm install
+   cd ..
+   ```
+4. **Maya sandbox** (optional):
+   ```bash
+   firebase functions:config:set maya.secret="sk_test_xxx" maya.merchantid="YOUR_MERCHANT_ID"
+   ```
+5. **Run locally**
+   ```bash
+   firebase emulators:start
+   ```
+6. **Deploy**
+   ```bash
+   firebase deploy
+   ```
+
+## Configure Payments
+- **Top-up**: `/api/createCheckout` creates a Maya Checkout (sandbox). Replace with production keys/URL for live.
+- **Webhook**: Set Maya webhook to `https://YOUR_PROJECT.web.app/api/webhooks/maya`.
+- **GCash**: Use an aggregator (Checkout.com, Adyen, PayMongo, Rapyd, Xendit). Implement its create-session + webhook similar to the Maya routes.
+
+## Security Notes
+- Verify webhook signatures per provider using `req.rawBody`.
+- Firestore rules block client balance edits; all balance mutations happen in Cloud Functions transactions.
+- Keep PRIZES and costs on the server; client loads read-only labels via `getConfig`.
+
+## Customize
+- Edit **SPIN_COST**, **MIN_WITHDRAW**, and **PRIZES** in `functions/index.js`.
+- Branding/UI in `web/styles.css`.
+- Add phone OTP or social login via Firebase Auth if needed.
+```
+
+>>>>>>> 88cf61e7ed2f4f6b90ab378a493d01be92612692
