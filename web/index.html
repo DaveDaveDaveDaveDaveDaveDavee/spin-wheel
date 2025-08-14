@@ -1,0 +1,87 @@
+
+# web/index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prepaid Prize Spin Wheel</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Firebase SDKs -->
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.4/firebase-functions-compat.js"></script>
+  <script defer src="firebase-init.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎡 Prepaid Prize Spin</h1>
+      <div id="auth">
+        <div id="when-logged-out">
+          <input id="email" type="email" placeholder="Email" />
+          <input id="password" type="password" placeholder="Password" />
+          <button id="signup">Sign up</button>
+          <button id="login">Log in</button>
+        </div>
+        <div id="when-logged-in" class="hidden">
+          <span id="user-email"></span>
+          <button id="logout">Log out</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="wallet">
+      <div class="stat">
+        <div>Balance</div>
+        <div id="balance">₱0</div>
+      </div>
+      <div class="actions">
+        <input id="topup-amount" type="number" min="10" step="10" value="50" />
+        <select id="provider">
+          <option value="maya">Maya (PayMaya)</option>
+          <option value="gcash">GCash (via aggregator)</option>
+        </select>
+        <button id="add-balance">Add Balance</button>
+      </div>
+    </section>
+
+    <section class="wheel-wrap">
+      <canvas id="wheel" width="520" height="520"></canvas>
+      <div class="controls">
+        <div>Spin cost: <strong id="spin-cost">₱—</strong></div>
+        <button id="spin">SPIN</button>
+        <div id="result" class="result"></div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Withdraw (min ₱<span id="min-withdraw">—</span>)</h3>
+      <div class="actions">
+        <input id="withdraw-amount" type="number" min="500" step="50" value="500" />
+        <select id="withdraw-provider">
+          <option value="maya">Maya</option>
+          <option value="gcash">GCash</option>
+        </select>
+        <input id="withdraw-name" type="text" placeholder="Account name" />
+        <input id="withdraw-phone" type="tel" placeholder="11-digit mobile" />
+        <button id="withdraw-btn">Withdraw</button>
+      </div>
+      <small>Note: Payouts are processed by your payment provider. This demo uses a mock payout in test.</small>
+    </section>
+
+    <section>
+      <h3>Recent Spins</h3>
+      <ul id="history"></ul>
+    </section>
+
+    <footer>
+      <small>For demo only. Replace test keys & sandbox URLs before going live.</small>
+    </footer>
+  </div>
+</body>
+</html>
+```
